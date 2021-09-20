@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Filter from './Components/Filter';
 import './App.css';
 
 const App: React.FC = () => {
@@ -20,11 +21,10 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {/* <Title />
+      <h1>Comments</h1>
       <Filter />
-      <Posts />
-      <NewPost */}
-      <h1>InnovationCast Discussion Challenge</h1>
+      {/* <PostList />
+      <Comment */}
       <p>Filter discussion component: all posts / only validated posts </p>
       <p>List of posts component </p>
       <p>Create new post component</p>
