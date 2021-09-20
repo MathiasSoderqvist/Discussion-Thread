@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createServer from "./server.js";
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+const NUMBER_OF_POSTS = 100;
+const PAGE_SIZE = 20;
+
+createServer(NUMBER_OF_POSTS, PAGE_SIZE);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -11,7 +16,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
