@@ -1,10 +1,17 @@
 import React from 'react'
+import Post from '../interfaces';
+import PostListItem from './PostListItem';
 
-const PostList = () => {
+interface Props {
+  posts: Post[];
+}
+const PostList: React.FC<Props> = ({ posts }) => {
   return (
-    <div>
       
-    </div>
-  )
+      <div >
+        Post {posts[0].userName}
+        <PostListItem />
+      </div>
+      )
 }
 export default PostList;

@@ -3,7 +3,8 @@ interface Post {
   userProfileImgUrl: string,
   comment: string,
   validated: boolean,
-  postedOn: string
+  postedOn: string,
+  id: string,
 }
 
 export default Post;
