@@ -1,7 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
+  let [posts, setPosts] = useState<any[]>([])
+
+  useEffect(() => {
+    getPosts();
+  }, [])
+
+  const getPosts = () => {
+    fetch('/api/posts')
+      .then((res) => res.json())
+      .then((data) => setPosts(data.posts))
+      .catch((error) => console.log('Error fetching notes', error));
+  };
+  console.table(posts);
+
+  console.log(posts);
+
   return (
     <div className="App">
       {/* <Title />
