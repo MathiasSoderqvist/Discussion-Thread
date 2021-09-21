@@ -4,6 +4,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 
 interface Props {
   filterValidated: () => void;
+  filter: boolean;
 }
 
 const useStyles = makeStyles({
@@ -32,17 +33,22 @@ const useStyles = makeStyles({
   text: {
     marginLeft: '25%',
   },
+  filtered: {
+    backgroundColor: 'green',
+  }
 });
 
-const Filter: React.FC<Props> = ({ filterValidated }) => {
+const Filter: React.FC<Props> = ({ filterValidated, filter }) => {
 
   const classes = useStyles();
   return (
     <div> 
-      <button onClick={() => filterValidated()} className={classes.button}>
+      <div style={ filter ? { borderStyle:'solid', borderColor: 'green'} : {border : 'none'} }> 
+      <button onClick={() => filterValidated()} className={classes.button} >
       <TuneIcon />
       <p className={classes.text}>Filter</p>
       </button>
+      </div>
     </div>
   )
 }

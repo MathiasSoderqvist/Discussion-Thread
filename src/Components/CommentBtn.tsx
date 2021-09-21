@@ -6,6 +6,15 @@ import ReplyTwoToneIcon from '@mui/icons-material/ReplyTwoTone';
 const useStyles = makeStyles({
   root: {
     float: 'right',
+    position: 'absolute',
+    bottom: '76%',
+    left: '85%',
+  },
+  icon: {
+    marginRight: '0.7rem',
+  },
+  button: {
+    
   },
 });
 
@@ -14,9 +23,10 @@ const CommentBtn: React.FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}> 
-      <Button variant="contained">
-        <ReplyTwoToneIcon />
-        Comment</Button>
+      <Button variant="contained" className={classes.button}>
+        <ReplyTwoToneIcon className={classes.icon}/>
+        Comment
+        </Button>
     </div>
   )
 }

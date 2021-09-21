@@ -4,20 +4,11 @@ import PostList from './Components/PostList';
 import NewPost from './Components/NewPost';
 import newPost from './ApiService';
 import CommentBtn from './Components/CommentBtn';
-import { makeStyles } from '@mui/styles'
 import './App.css';
-import { ClassNames } from '@emotion/react';
-
-const useStyles = makeStyles({
-  
-});
 
 const App: React.FC = () => {
   let [posts, setPosts] = useState<any[]>([])
   let [filter, setFilter] = useState<boolean>(false)
-  let [pages, setPages] = useState([])
-
-  const classes = useStyles();
 
   useEffect(() => {
     getPosts();
@@ -55,10 +46,13 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>Comments</h1>
-      <Filter filterValidated={filterValidated}/>
+      <Filter 
+        filterValidated={filterValidated} 
+        filter={filter}
+      />
       {(posts.length > 0) ?
-      <PostList posts={posts}/>
-      : <div></div>}
+        <PostList posts={posts}/>
+        : <div></div>}
       <NewPost createPost={createPost} />
       <CommentBtn />
     </div>

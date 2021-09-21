@@ -1,5 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles'
+import ThumbUpOffAltTwoToneIcon from '@mui/icons-material/ThumbUpOffAltTwoTone';
+import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
+import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
 import moment from 'moment';
 
 interface Props {
@@ -36,6 +39,14 @@ const useStyles = makeStyles({
   line: {
     border: '1px solid #eaeaea'
   },
+  thumbup: {
+    marginLeft: '90%',
+  },
+  icons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingBottom: '1rem',
+  },
 })
 
 const PostListItem: React.FC<Props> = ({ username, img, comment, postedOn }) => {
@@ -52,6 +63,11 @@ const PostListItem: React.FC<Props> = ({ username, img, comment, postedOn }) => 
       </div>
       </div>
       <p className={classes.comment}>{comment}</p>
+      <div className={classes.icons}>
+      <ThumbUpOffAltTwoToneIcon className={classes.thumbup} />
+      <ShareTwoToneIcon />
+      <MoreHorizTwoToneIcon />
+      </div>
       <hr className={classes.line}/>   
       </div>
   )
