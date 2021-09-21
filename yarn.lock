@@ -2444,6 +2444,18 @@
     "@typescript-eslint/types" "4.15.2"
     "eslint-visitor-keys" "^2.0.0"
 
+"@virtuoso.dev/react-urx@^0.2.5":
+  "integrity" "sha512-iaJ/1vz7dkfpIxEjOpgOme8X6KkUsz16RoqpFHtqbKiQW1FI+1h7YbyTxhz5D9xmg/VZU9gHpXvPHTzdKIKa3Q=="
+  "resolved" "https://registry.npmjs.org/@virtuoso.dev/react-urx/-/react-urx-0.2.7.tgz"
+  "version" "0.2.7"
+  dependencies:
+    "@virtuoso.dev/urx" "^0.2.7"
+
+"@virtuoso.dev/urx@^0.2.5", "@virtuoso.dev/urx@^0.2.7":
+  "integrity" "sha512-mv6V6Gzf1QnGUzb5Rwv5Eqs3DRX5R4nGIojVXtD+fAFnr2SAvpHNPMRNdAclvD/pcdiga6rTzUhFwq4FBC2MDw=="
+  "resolved" "https://registry.npmjs.org/@virtuoso.dev/urx/-/urx-0.2.7.tgz"
+  "version" "0.2.7"
+
 "@webassemblyjs/ast@1.9.0":
   "integrity" "sha512-C6wW5L+b7ogSDVqymbkkvuW9kruN//YisMED04xzeBBqjHa2FYnmvOlS6Xj68xWQRgWvI9cIglsjFowH/RJyEA=="
   "resolved" "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.9.0.tgz"
@@ -10787,7 +10799,15 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^17.0.2", "react@>= 16", "react@>= 16.8.0", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
+"react-virtuoso@^2.2.0":
+  "integrity" "sha512-Kc/xY/0sCzKL8HUDOI51iLWd1BE+K7Ap5a9DjIAYKIOMt/CnbJ7Em8a6LvGlAx7dyLT5ZJEkNnZNhQMuIzPdKQ=="
+  "resolved" "https://registry.npmjs.org/react-virtuoso/-/react-virtuoso-2.2.0.tgz"
+  "version" "2.2.0"
+  dependencies:
+    "@virtuoso.dev/react-urx" "^0.2.5"
+    "@virtuoso.dev/urx" "^0.2.5"
+
+"react@*", "react@^17.0.2", "react@>= 16", "react@>= 16.8.0", "react@>=16", "react@>=16.6.0", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"

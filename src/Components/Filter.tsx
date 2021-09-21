@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  backgroundColor: '#FAFAFA',
+  backgroundColor: '#ELELEL',
   border: 0,
   borderRadius: 6,
   boxShadow: 'none',
