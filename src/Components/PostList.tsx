@@ -9,6 +9,7 @@ interface Props {
 }
 
 const PostList: React.FC<Props> = ({ posts }) => {
+
   return (
       
     <div >
@@ -31,3 +32,7 @@ const PostList: React.FC<Props> = ({ posts }) => {
 }
 
 export default PostList;
+
+function typeOf(height: number): any {
+  throw new Error('Function not implemented.');
+}

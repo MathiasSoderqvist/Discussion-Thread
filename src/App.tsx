@@ -5,6 +5,7 @@ import './App.css';
 
 const App: React.FC = () => {
   let [posts, setPosts] = useState<any[]>([])
+  let [filter, setFilter] = useState<boolean>(false)
 
   useEffect(() => {
     getPosts();
@@ -16,6 +17,17 @@ const App: React.FC = () => {
       .then((data) => setPosts(data.posts))
       .catch((error) => console.log('Error fetching posts', error));
   };
+
+  const filterValidated = () => {
+    if(!filter) {
+      setPosts(posts.filter((post) => post.validated));
+      setFilter(true);
+    } else {
+      getPosts();
+      setFilter(false);
+    }
+  }
+
   console.table(posts);
 
   console.log("Posts:", posts);
@@ -23,7 +35,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>Comments</h1>
-      <Filter />
+      <Filter filterValidated={filterValidated}/>
       {(posts.length > 0) ?
       <PostList posts={posts}/>
       : <div></div>}

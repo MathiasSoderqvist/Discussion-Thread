@@ -2,13 +2,17 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import TuneIcon from '@mui/icons-material/Tune';
 
+interface Props {
+  filterValidated: () => void;
+}
+
 const useStyles = makeStyles({
-  root: {
+  button: {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-evenly',
-  backgroundColor: '#ELELEL',
+  backgroundColor: '#F0F0F0',
   border: 0,
   borderRadius: 6,
   boxShadow: 'none',
@@ -18,18 +22,24 @@ const useStyles = makeStyles({
   marginBottom: '5%',
   fontWeight: 'bold',
   padding: '0 30px',
+  fontSize: '1em',
+  transition: "background 0.5s, color 0.5s, border 0.5s",
+  "&:hover": {
+  backgroundColor: "#e6f2ff",
+  color: "#0092DB"
+  },
   },
   text: {
     marginLeft: '25%',
   },
 });
 
-const Filter: React.FC = () => {
+const Filter: React.FC<Props> = ({ filterValidated }) => {
 
   const classes = useStyles();
   return (
     <div> 
-      <button className={classes.root}>
+      <button onClick={() => filterValidated()} className={classes.button}>
       <TuneIcon />
       <p className={classes.text}>Filter</p>
       </button>
