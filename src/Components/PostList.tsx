@@ -14,7 +14,7 @@ const PostList: React.FC<Props> = ({ posts }) => {
       
     <div >
       <Virtuoso
-        style={{ height: "800px", width: "70%" }}
+        style={{ height: "675px", width: "80%" }}
         totalCount={100}
         itemContent={(index) => <div>
           {posts.map(post => 
@@ -33,6 +33,3 @@ const PostList: React.FC<Props> = ({ posts }) => {
 
 export default PostList;
 
-function typeOf(height: number): any {
-  throw new Error('Function not implemented.');
-}
