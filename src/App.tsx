@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Filter from './Components/Filter';
 import PostList from './Components/PostList';
+import NewPost from './Components/NewPost';
 import './App.css';
 
 const App: React.FC = () => {
@@ -39,7 +40,7 @@ const App: React.FC = () => {
       {(posts.length > 0) ?
       <PostList posts={posts}/>
       : <div></div>}
-      {/* <NewPost */}
+      <NewPost  />
     </div>
   );
 }
