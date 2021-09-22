@@ -2,6 +2,10 @@
 
 Front-end Stack: React, Typescript, Virtuoso, Material-UI
 
+### `npm install`
+
+Install dependencies before running in browser.
+
 ### `npm start`
 
 Runs the app in the development mode.\
