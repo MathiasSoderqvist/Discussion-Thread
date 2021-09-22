@@ -2,6 +2,10 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import ReplyTwoToneIcon from '@mui/icons-material/ReplyTwoTone';
 
+interface Props {
+  handleFocus : () => void;
+}
+
 const useStyles = makeStyles({
   root: {
     float: 'right',
@@ -36,14 +40,10 @@ const useStyles = makeStyles({
   },
 });
 
-interface CommentBtnProps {
-  commentBtn: boolean;
-}
-
-const CommentBtn: React.FC<CommentBtnProps> = ({ commentBtn }) => {
+const CommentBtn: React.FC<Props> = ({ handleFocus }) => {
 
   const clickHandler = () => {
-    return commentBtn = true;
+    handleFocus();
   }
 
   const classes = useStyles();

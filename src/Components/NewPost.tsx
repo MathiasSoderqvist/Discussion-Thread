@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles'
 import IconButton from '@mui/material/IconButton';
@@ -6,7 +6,7 @@ import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
 
 interface Props {
   createPost: (body: Object) => void;
-  commentBtnClicked: boolean;
+  focusClicked: boolean;
 }
 
 const useStyles = makeStyles({
@@ -20,27 +20,14 @@ const useStyles = makeStyles({
   }
 });
 
-const NewPost: React.FC<Props> = ({ createPost }) => {
+const NewPost: React.FC<Props> = ({ createPost, focusClicked }) => {
   const [comment, setComment] = React.useState('');
   const validated = true;
   const userName = 'You';
   const userProfileImgUrl = 'https://cdn.fakercloud.com/avatars/arthurholcombe1_128.jpg';
   const postedOn = new Date();
-  //start
   const focusInput = useRef();
-//   useEffect(() => {
-//      focus();
-//      setCommentBtnClicked(false);
-//     }, [commentBtnClicked]);
 
-// EXAMPLE const showRefContent = () => {
-//   console.log(textRef.current.value);
-// };
- 
-//  const focus = () => {
-//      if(focusInput.current) focusInput.current.focus(); 
-//     }
-    //eend
   const classes = useStyles();
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
@@ -53,6 +40,14 @@ const NewPost: React.FC<Props> = ({ createPost }) => {
     const onInputChange = (e: React.FormEvent<HTMLDivElement> ) => {
       const target = e.target as HTMLTextAreaElement;
       setComment(target.value);
+    };
+
+    useEffect(() => {
+      focusOn(focusInput);
+    }, [focusClicked]);
+
+    const focusOn = (ref: React.MutableRefObject<any>) => {
+      ref.current.focus();
     };
 
   return (
