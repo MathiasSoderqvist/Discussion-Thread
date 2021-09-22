@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
 
 interface Props {
-  createPost: (body: any) => void;
+  createPost: (body: Object) => void;
 }
 
 const useStyles = makeStyles({

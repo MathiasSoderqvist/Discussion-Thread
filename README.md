@@ -1,6 +1,6 @@
 # Discussion Thread App
 
-Front-end Stack: React, Typescript, Virtuoso, Material-UI
+Front-end Stack: React, Typescript, Virtuoso, Material-UI (with styled components)
 
 ### `npm install`
 

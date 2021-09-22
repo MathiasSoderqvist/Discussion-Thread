@@ -23,10 +23,9 @@ const App: React.FC = () => {
     } 
   }
 
-  const createPost = (body: any) => {
+  const createPost = (body: Object) => {
     newPost(body)
       .then(post => {
-        console.log("POST", post.posts);
         setPosts(prevPosts => [...prevPosts,  post.posts])
       })
   }
@@ -43,8 +42,6 @@ const App: React.FC = () => {
     //handle focus
     return
   }
-
-  console.table(posts);
 
   return (
     <div className="App">
