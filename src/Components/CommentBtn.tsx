@@ -36,7 +36,15 @@ const useStyles = makeStyles({
   },
 });
 
-const CommentBtn: React.FC = () => {
+interface CommentBtnProps {
+  commentBtn: boolean;
+}
+
+const CommentBtn: React.FC<CommentBtnProps> = ({ commentBtn }) => {
+
+  const clickHandler = () => {
+    return commentBtn = true;
+  }
 
   const classes = useStyles();
   return (
@@ -44,7 +52,7 @@ const CommentBtn: React.FC = () => {
       <button 
         className={classes.button} 
         onClick={()=>{
-        console.log("clicked comment")}
+        clickHandler()}
       }>
       <ReplyTwoToneIcon className={classes.icon}/>
         Comment

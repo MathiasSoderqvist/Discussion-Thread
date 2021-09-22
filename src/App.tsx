@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Filter from './Components/Filter';
 import PostList from './Components/PostList';
 import NewPost from './Components/NewPost';
@@ -9,6 +9,8 @@ import './App.css';
 const App: React.FC = () => {
   let [posts, setPosts] = useState<any[]>([])
   let [filter, setFilter] = useState<boolean>(false)
+  let [commentBtnClicked, setCommentBtnClicked] = useState<boolean>(false)
+  
 
   useEffect(() => {
     getPosts();
@@ -56,8 +58,11 @@ const App: React.FC = () => {
         filter={filter}
         />
         : <div></div>}
-      <NewPost createPost={createPost} />
-      <CommentBtn />
+      <NewPost 
+        createPost={createPost}
+        commentBtnClicked={commentBtnClicked}
+      />
+      <CommentBtn commentBtn={commentBtnClicked}/>
     </div>
   );
 }
