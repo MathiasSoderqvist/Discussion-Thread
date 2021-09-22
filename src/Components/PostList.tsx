@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Post from '../interfaces';
 import PostListItem from './PostListItem';
+import NumberPicker from './NumberPicker';
 import { Virtuoso } from 'react-virtuoso'
-
 
 interface Props {
   posts: Post[];
@@ -10,13 +10,15 @@ interface Props {
 }
 
 const PostList: React.FC<Props> = ({ posts, filter }) => {
-
+  const virtuoso = useRef(null);
+  
   return (
       
     <div >
       <Virtuoso
-        style={{ height: "675px", width: "80%" }}
+        style={{ height: "500px", width: "80%" }}
         totalCount={100}
+        ref={virtuoso}
         itemContent={(index) => <div>
           {filter ? posts.filter((post) => post.validated).map((post, index) => 
             <PostListItem 
@@ -36,6 +38,7 @@ const PostList: React.FC<Props> = ({ posts, filter }) => {
             />)}
           </div>}
       />  
+      <NumberPicker virtuoso={virtuoso}/>
     </div>
       )
 }

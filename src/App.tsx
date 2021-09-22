@@ -21,7 +21,7 @@ const App: React.FC = () => {
       .then((data) => setPosts(prevPosts => [...prevPosts,  ...data.posts]))
       .catch((error) => console.log('Error fetching posts', error));
     } 
-  };
+  }
 
   const createPost = (body: any) => {
     newPost(body)
@@ -37,6 +37,11 @@ const App: React.FC = () => {
     } else {
       setFilter(false);
     }
+  }
+
+  const handleFocus = () => {
+    //handle focus
+    return
   }
 
   console.table(posts);

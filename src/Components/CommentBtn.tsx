@@ -41,7 +41,11 @@ const CommentBtn: React.FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}> 
-      <button className={classes.button}>
+      <button 
+        className={classes.button} 
+        onClick={()=>{
+        console.log("clicked comment")}
+      }>
       <ReplyTwoToneIcon className={classes.icon}/>
         Comment
       </button>

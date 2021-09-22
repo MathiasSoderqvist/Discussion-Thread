@@ -23,13 +23,14 @@ const NewPost: React.FC<Props> = ({ createPost }) => {
   const [comment, setComment] = React.useState('');
   const validated = true;
   const userName = 'You';
-  const userProfileImgUrl = 'https://source.unsplash.com/random';
+  const userProfileImgUrl = 'https://cdn.fakercloud.com/avatars/arthurholcombe1_128.jpg';
+  const postedOn = new Date();
 
   const classes = useStyles();
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault();
-      let input = { userName, userProfileImgUrl, comment, validated }
+      let input = { userName, userProfileImgUrl, comment, validated, postedOn };
         createPost(input);
         setComment('');
     }
