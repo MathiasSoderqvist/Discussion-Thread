@@ -18,7 +18,7 @@ const App: React.FC = () => {
     for (let i = 1; i < 6; i++) {
       fetch(`/api/posts?page=${i}`)
       .then((res) => res.json())
-      .then((data) => setPosts(data.posts))
+      .then((data) => setPosts(prevPosts => [...prevPosts,  ...data.posts]))
       .catch((error) => console.log('Error fetching posts', error));
     } 
   };
@@ -33,10 +33,8 @@ const App: React.FC = () => {
 
   const filterValidated = () => {
     if(!filter) {
-      setPosts(posts.filter((post) => post.validated));
       setFilter(true);
     } else {
-      getPosts();
       setFilter(false);
     }
   }
@@ -51,7 +49,10 @@ const App: React.FC = () => {
         filter={filter}
       />
       {(posts.length > 0) ?
-        <PostList posts={posts}/>
+        <PostList 
+        posts={posts}
+        filter={filter}
+        />
         : <div></div>}
       <NewPost createPost={createPost} />
       <CommentBtn />

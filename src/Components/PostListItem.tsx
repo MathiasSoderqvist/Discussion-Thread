@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles'
-import ThumbUpOffAltTwoToneIcon from '@mui/icons-material/ThumbUpOffAltTwoTone';
+import ThumbUpOffAltTwoToneIcon from '@mui/icons-material/ThumbUpOffAltOutlined';
 import ShareTwoToneIcon from '@mui/icons-material/ShareTwoTone';
 import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
+import ReadMore from './ReadMore';
 import moment from 'moment';
 
 interface Props {
@@ -27,11 +28,6 @@ const useStyles = makeStyles({
   },
   time: {
     color: '#636363',
-  },
-  comment: {
-    marginLeft: '8%',
-    marginRight: '5%',
-    marginBottom: '5%',
   },
   username: {
     marginLeft: '3%',
@@ -62,14 +58,16 @@ const PostListItem: React.FC<Props> = ({ username, img, comment, postedOn }) => 
         <p className={classes.time}>{moment(postedOn, "YYYYMMDD").fromNow()}</p>
       </div>
       </div>
-      <p className={classes.comment}>{comment}</p>
+      <ReadMore >
+        {comment}
+      </ReadMore>
       <div className={classes.icons}>
-      <ThumbUpOffAltTwoToneIcon className={classes.thumbup} />
-      <ShareTwoToneIcon />
-      <MoreHorizTwoToneIcon />
+        <ThumbUpOffAltTwoToneIcon className={classes.thumbup} />
+        <ShareTwoToneIcon />
+        <MoreHorizTwoToneIcon />
       </div>
       <hr className={classes.line}/>   
-      </div>
+    </div>
   )
 }
 

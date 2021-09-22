@@ -43,7 +43,7 @@ const Filter: React.FC<Props> = ({ filterValidated, filter }) => {
   const classes = useStyles();
   return (
     <div> 
-      <div style={ filter ? { borderStyle:'solid', borderColor: 'green'} : {border : 'none'} }> 
+      <div > 
       <button onClick={() => filterValidated()} className={classes.button} >
       <TuneIcon />
       <p className={classes.text}>Filter</p>
