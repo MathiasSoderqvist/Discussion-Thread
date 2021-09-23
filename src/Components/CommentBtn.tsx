@@ -43,10 +43,6 @@ const useStyles = makeStyles({
 
 const CommentBtn: React.FC<Props> = ({ handleFocus, focusClicked }) => {
 
-  const clickHandler = () => {
-    handleFocus();
-  }
-
   const classes = useStyles();
   return (
     <div className={classes.root}> 
@@ -54,7 +50,7 @@ const CommentBtn: React.FC<Props> = ({ handleFocus, focusClicked }) => {
         className={classes.button} 
         style={{backgroundColor: focusClicked ? '#FF7F7F' : '#e6f2ff', color: focusClicked ? '#FFF' : '#0092DB'}}
         onClick={()=>{
-        clickHandler()}
+        handleFocus()}
       }>
       <ReplyTwoToneIcon className={classes.icon}/>
       {focusClicked ? 'Close' : 'Comment'}

@@ -34,7 +34,6 @@ const App: React.FC = () => {
     .then((res) => res.json())
     .then((data) => setPosts(prevPosts => [...prevPosts,  ...data.posts]))
     .catch((error) => console.log('Error fetching page', error));
-    
 }
 
 // Load posts for next page
