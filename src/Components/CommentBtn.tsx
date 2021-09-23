@@ -52,6 +52,7 @@ const CommentBtn: React.FC<Props> = ({ handleFocus, focusClicked }) => {
     <div className={classes.root}> 
       <button 
         className={classes.button} 
+        style={{backgroundColor: focusClicked ? '#FF7F7F' : '#e6f2ff', color: focusClicked ? '#FFF' : '#0092DB'}}
         onClick={()=>{
         clickHandler()}
       }>
