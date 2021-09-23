@@ -1,42 +1,88 @@
-import React, { useRef } from 'react'
-import Post from '../interfaces';
+import React, { useCallback, useRef, useState } from 'react'
+import { Post } from '../interfaces';
 import PostListItem from './PostListItem';
 import NumberPicker from './NumberPicker';
-import { Virtuoso } from 'react-virtuoso'
+import { Virtuoso, VirtuosoHandle } from 'react-virtuoso'
 
 interface Props {
   posts: Post[];
   filter: boolean;
   focusClicked: boolean;
+  getNextPage: (pageNumber: number) => void;
+  getPrevPage: (pageNumber: number) => void;
 }
 
-const PostList: React.FC<Props> = ({ posts, filter, focusClicked }) => {
-  const virtuoso = useRef(null);
-  
+const PostList: React.FC<Props> = ({ posts, filter, focusClicked, getPrevPage, getNextPage }) => {
+  const virtuoso = useRef<VirtuosoHandle>(null);
+  const START_INDEX = 1;
+  const INITIAL_ITEM_COUNT = 20;
+  const FIRST_PAGE = 1;
+  const LAST_PAGE = 6;
+  console.log("Posts Length: ", posts.length);
+
+  const [currentPagePrepend, setCurrentPagePrepend] = useState<number>(START_INDEX)
+  const [currentPageAppend, setCurrentPageAppend] = useState<number>(START_INDEX)
+  const [currentPage, setCurrentPage] = useState<number>(START_INDEX)
+
+  const prependItems = useCallback(() => {
+    if (currentPagePrepend <= FIRST_PAGE) {
+      setCurrentPagePrepend(LAST_PAGE);
+    }
+    const previousPage = currentPagePrepend - 1;
+
+    setTimeout(() => {
+      setCurrentPage(previousPage);
+      setCurrentPagePrepend(previousPage);
+      getPrevPage(previousPage);
+    }, 500);
+
+    return false
+  }, [currentPagePrepend, getPrevPage])
+
+  const appendItems = useCallback(() => {
+    if (currentPageAppend >= LAST_PAGE) {
+      setCurrentPageAppend(FIRST_PAGE);
+    }
+    const nextPage = currentPageAppend + 1
+
+    setTimeout(() => {
+      setCurrentPage(nextPage);
+      setCurrentPageAppend(nextPage); 
+      getNextPage(nextPage);
+    }, 500);
+
+    return false
+  }, [currentPageAppend, getNextPage])
+
   return (
       
     <div >
       <Virtuoso
+        firstItemIndex={currentPage}
+        initialTopMostItemIndex={INITIAL_ITEM_COUNT - 10}
         style={{ height: focusClicked ? "350px": "600px", width: "80%" }}
-        totalCount={100}
+        totalCount={20}
         ref={virtuoso}
-        itemContent={(index) => <div>
-          {filter ? posts.filter((post) => post.validated).map((post, index) => 
+        data={posts}
+        startReached={prependItems}
+        endReached={appendItems}
+        itemContent={(index, post) => <div>
+          {filter ? posts.filter((post) => post.validated).map(post => 
             <PostListItem 
               key={index} 
               username={post.userName} 
               img={post.userProfileImgUrl}
               comment={post.comment}
               postedOn={post.postedOn}
-            />) 
-            : posts.map(post => 
+            />)
+            : 
             <PostListItem 
               key={index+1*Math.random()} 
               username={post.userName} 
               img={post.userProfileImgUrl}
               comment={post.comment}
               postedOn={post.postedOn}
-            />)}
+            />}
           </div>}
       />  
       <NumberPicker virtuoso={virtuoso}/>
