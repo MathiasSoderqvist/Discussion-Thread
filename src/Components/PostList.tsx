@@ -7,16 +7,17 @@ import { Virtuoso } from 'react-virtuoso'
 interface Props {
   posts: Post[];
   filter: boolean;
+  focusClicked: boolean;
 }
 
-const PostList: React.FC<Props> = ({ posts, filter }) => {
+const PostList: React.FC<Props> = ({ posts, filter, focusClicked }) => {
   const virtuoso = useRef(null);
   
   return (
       
     <div >
       <Virtuoso
-        style={{ height: "500px", width: "80%" }}
+        style={{ height: focusClicked ? "500px": "650px", width: "80%" }}
         totalCount={100}
         ref={virtuoso}
         itemContent={(index) => <div>

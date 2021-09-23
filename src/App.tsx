@@ -5,7 +5,7 @@ import NewPost from './Components/NewPost';
 import newPost from './ApiService';
 import CommentBtn from './Components/CommentBtn';
 import './App.css';
-
+ 
 const App: React.FC = () => {
   let [posts, setPosts] = useState<any[]>([])
   let [filter, setFilter] = useState<boolean>(false)
@@ -44,7 +44,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="App">
+      <div className="App">
       <h1>Comments</h1>
       <Filter 
         filterValidated={filterValidated} 
@@ -52,12 +52,20 @@ const App: React.FC = () => {
       />
       {(posts.length > 0) ?
         <PostList 
-        posts={posts}
-        filter={filter}
+          posts={posts}
+          filter={filter}
+          focusClicked={focusClicked}
         />
-        : <div></div>}
-      <NewPost createPost={createPost} focusClicked={focusClicked}/>
-      <CommentBtn handleFocus={handleFocus}/>
+      : <div></div>}
+      {(focusClicked) ?
+        <NewPost 
+        createPost={createPost} 
+        focusClicked={focusClicked}
+      />
+      : <div></div>}
+      <CommentBtn 
+      focusClicked={focusClicked}
+      handleFocus={handleFocus}/>
     </div>
   );
 }

@@ -32,7 +32,7 @@ const ReadMore: React.FC = ({ children }) => {
       <p className={classes.text}>
         {isReadMore ? sliced(text) : text}
         <span onClick={toggleReadMore} className={classes.readOrHide}>
-        {isReadMore ? "...read more" : ""}
+        {isReadMore ? "...read more" : "see less"}
       </span>
       </p>
     </div>

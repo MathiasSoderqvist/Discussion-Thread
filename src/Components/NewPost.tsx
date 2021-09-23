@@ -27,7 +27,6 @@ const NewPost: React.FC<Props> = ({ createPost, focusClicked }) => {
   const userProfileImgUrl = 'https://cdn.fakercloud.com/avatars/arthurholcombe1_128.jpg';
   const postedOn = new Date();
   const focusInput = useRef();
-
   const classes = useStyles();
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {

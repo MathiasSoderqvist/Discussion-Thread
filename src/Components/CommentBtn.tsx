@@ -4,6 +4,7 @@ import ReplyTwoToneIcon from '@mui/icons-material/ReplyTwoTone';
 
 interface Props {
   handleFocus : () => void;
+  focusClicked: boolean;
 }
 
 const useStyles = makeStyles({
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CommentBtn: React.FC<Props> = ({ handleFocus }) => {
+const CommentBtn: React.FC<Props> = ({ handleFocus, focusClicked }) => {
 
   const clickHandler = () => {
     handleFocus();
@@ -55,7 +56,7 @@ const CommentBtn: React.FC<Props> = ({ handleFocus }) => {
         clickHandler()}
       }>
       <ReplyTwoToneIcon className={classes.icon}/>
-        Comment
+      {focusClicked ? 'Close' : 'Comment'}
       </button>
     </div>
   )
