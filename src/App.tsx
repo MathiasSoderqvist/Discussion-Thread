@@ -61,6 +61,7 @@ const App: React.FC = () => {
         <NewPost 
         createPost={createPost} 
         focusClicked={focusClicked}
+        handleFocus={handleFocus}
       />
       : <div></div>}
       <CommentBtn 

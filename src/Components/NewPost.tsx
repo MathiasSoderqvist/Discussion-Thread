@@ -7,6 +7,7 @@ import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
 interface Props {
   createPost: (body: Object) => void;
   focusClicked: boolean;
+  handleFocus: () => void;
 }
 
 const useStyles = makeStyles({
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   }
 });
 
-const NewPost: React.FC<Props> = ({ createPost, focusClicked }) => {
+const NewPost: React.FC<Props> = ({ createPost, focusClicked, handleFocus }) => {
   const [comment, setComment] = React.useState('');
   const validated = true;
   const userName = 'You';
@@ -31,12 +32,13 @@ const NewPost: React.FC<Props> = ({ createPost, focusClicked }) => {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
       e.preventDefault();
+      handleFocus();
       let input = { userName, userProfileImgUrl, comment, validated, postedOn };
         createPost(input);
         setComment('');
     }
     
-    const onInputChange = (e: React.FormEvent<HTMLDivElement> ) => {
+    const onInputChange = (e: React.FormEvent<HTMLDivElement>) => {
       const target = e.target as HTMLTextAreaElement;
       setComment(target.value);
     };
