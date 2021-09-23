@@ -2,11 +2,6 @@ import React, {useState} from 'react';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
-  text: {
-    marginLeft: '8%',
-    marginRight: '5%',
-    marginBottom: '5%',
-  },
   readOrHide: {
     color: 'rgb(192,192,192)',
     cursor: 'pointer',
@@ -24,12 +19,12 @@ const ReadMore: React.FC = ({ children }) => {
   };
 
   const sliced = (text: any) => {
-    return text.slice(0, 500);
+    return text.slice(0, 400);
   } 
 
   return (
     <div>
-      <p className={classes.text}>
+      <p>
         {isReadMore ? sliced(text) : text}
         <span onClick={toggleReadMore} className={classes.readOrHide}>
         {isReadMore ? "...read more" : "hide"}

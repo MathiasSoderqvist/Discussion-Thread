@@ -4,10 +4,11 @@ import PostList from './Components/PostList';
 import NewPost from './Components/NewPost';
 import newPost from './ApiService';
 import CommentBtn from './Components/CommentBtn';
+import Post from './interfaces';
 import './App.css';
  
 const App: React.FC = () => {
-  let [posts, setPosts] = useState<any[]>([])
+  let [posts, setPosts] = useState<Post[]>([])
   let [filter, setFilter] = useState<boolean>(false)
   let [focusClicked, setFocusClicked] = useState<boolean>(false)
 

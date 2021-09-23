@@ -30,26 +30,26 @@ const NewPost: React.FC<Props> = ({ createPost, focusClicked, handleFocus }) => 
   const focusInput = useRef();
   const classes = useStyles();
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-      e.preventDefault();
-      handleFocus();
-      let input = { userName, userProfileImgUrl, comment, validated, postedOn };
-        createPost(input);
-        setComment('');
-    }
-    
-    const onInputChange = (e: React.FormEvent<HTMLDivElement>) => {
-      const target = e.target as HTMLTextAreaElement;
-      setComment(target.value);
-    };
+  useEffect(() => {
+    focusOn(focusInput);
+  }, [focusClicked]);
 
-    useEffect(() => {
-      focusOn(focusInput);
-    }, [focusClicked]);
-
-    const focusOn = (ref: React.MutableRefObject<any>) => {
-      ref.current.focus();
-    };
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    handleFocus();
+    let input = { userName, userProfileImgUrl, comment, validated, postedOn };
+      createPost(input);
+      setComment('');
+  }
+  
+  const onInputChange = (e: React.FormEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLTextAreaElement;
+    setComment(target.value);
+  };
+  
+  const focusOn = (ref: React.MutableRefObject<any>) => {
+    ref.current.focus();
+  };
 
   return (
     <div className={classes.container}>

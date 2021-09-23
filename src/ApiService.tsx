@@ -1,4 +1,4 @@
-function newPost (body: any) {
+function newPost (body: Object) {
   return fetchRequest('/api/posts', {
     method: 'POST',
     headers: {

@@ -43,6 +43,11 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     paddingBottom: '1rem',
   },
+  text: {
+    marginLeft: '8%',
+    marginRight: '5%',
+    marginBottom: '5%',
+  },
 })
 
 const PostListItem: React.FC<Props> = ({ username, img, comment, postedOn }) => {
@@ -58,9 +63,11 @@ const PostListItem: React.FC<Props> = ({ username, img, comment, postedOn }) => 
         <p className={classes.time}>{moment(postedOn, "YYYYMMDD").fromNow()}</p>
       </div>
       </div>
+      <div className={classes.text}>
       <ReadMore >
         {comment}
       </ReadMore>
+      </div>
       <div className={classes.icons}>
         <ThumbUpOffAltTwoToneIcon className={classes.thumbup} />
         <ShareTwoToneIcon />

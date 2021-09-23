@@ -17,7 +17,7 @@ const PostList: React.FC<Props> = ({ posts, filter, focusClicked }) => {
       
     <div >
       <Virtuoso
-        style={{ height: focusClicked ? "400px": "620px", width: "80%" }}
+        style={{ height: focusClicked ? "350px": "600px", width: "80%" }}
         totalCount={100}
         ref={virtuoso}
         itemContent={(index) => <div>
