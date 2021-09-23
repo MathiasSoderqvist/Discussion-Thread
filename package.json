@@ -57,5 +57,6 @@
     "install": "^0.13.0",
     "miragejs": "^0.1.41",
     "npm": "^7.24.0"
-  }
+  },
+  "homepage": "https://mathiassoderqvist.github.io/discussion-thread"
 }
