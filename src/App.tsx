@@ -25,27 +25,9 @@ const App: React.FC = () => {
     setFilterPosts(true);
   }, []);
 
-  // useEffect(() => {
-  //   const filterAllPosts = () => {
-  //     setFilteredPosts(posts.filter(post => post.validated));
-  //   }
-  //   filterAllPosts()
-  // }, [filter])
-
-  // const filterAllPosts = useCallback(() => {
-  //   setFilteredPosts(posts.filter(post => post.validated));
-  // }, [])
-  // useEffect(() => {
-  //   filterAllPosts()
-  // }, [filterAllPosts])
-
-//   const getFilterPagePosts = () => {
-//     setFilteredPosts(posts.filter(post => post.validated));
-// }
-
-useEffect(() => {
-  setFilteredPosts(posts.filter(post => post.validated));
-}, [filter]);
+  useEffect(() => {
+    setFilteredPosts(posts.filter(post => post.validated));
+  }, [filter]);
 
   const getPagePosts = (currentPage: number) => {
     fetch(`/api/posts?page${currentPage}`)
