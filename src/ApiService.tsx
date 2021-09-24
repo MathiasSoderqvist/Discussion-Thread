@@ -8,7 +8,15 @@ function newPost (body: Object) {
   });
 }
 
-function fetchRequest (path: string, options: RequestInit | undefined) {
+const getPage = (pageNumber: number) => {
+  return fetchRequest(`/api/posts?page${pageNumber}`);
+}
+
+const getPagePosts = (currentPage: number) => {
+  return fetchRequest(`/api/posts?page${currentPage}`);
+}
+
+function fetchRequest (path: string, options?: RequestInit | undefined) {
   return fetch(path, options)
   .then(res => res.status <= 400 ? res : Promise.reject())
   .then(res => res.status === 204 ? res : res.json())
@@ -17,4 +25,5 @@ function fetchRequest (path: string, options: RequestInit | undefined) {
   })
 }
 
-export default newPost;
+const API = { newPost, getPage, getPagePosts };
+export default API;

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Post } from '../interfaces';
 import PostListItem from './PostListItem';
 import NumberPicker from './NumberPicker';
@@ -6,13 +6,14 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso'
 
 interface Props {
   posts: Post[];
+  filteredPosts: Post[];
   filter: boolean;
   focusClicked: boolean;
   getNextPage: (pageNumber: number) => void;
   getPrevPage: (pageNumber: number) => void;
 }
 
-const PostList: React.FC<Props> = ({ posts, filter, focusClicked, getPrevPage, getNextPage }) => {
+const PostList: React.FC<Props> = ({ posts, filteredPosts, filter, focusClicked, getPrevPage, getNextPage }) => {
   const virtuoso = useRef<VirtuosoHandle>(null);
   const START_INDEX = 1;
   const INITIAL_ITEM_COUNT = 20;
@@ -52,39 +53,29 @@ const PostList: React.FC<Props> = ({ posts, filter, focusClicked, getPrevPage, g
     }, 500);
 
     return false
-  }, [currentPageAppend, getNextPage])
+  }, [currentPageAppend, getNextPage])    
 
   return (
-      
     <div >
       <Virtuoso
-        firstItemIndex={currentPage}
+        firstItemIndex={currentPage+5}
         initialTopMostItemIndex={INITIAL_ITEM_COUNT - 10}
         style={{ height: focusClicked ? "350px": "600px", width: "80%" }}
         totalCount={20}
         ref={virtuoso}
-        data={posts}
+        data={filter !== undefined && filter ? filteredPosts : posts}
         startReached={prependItems}
         endReached={appendItems}
         itemContent={(index, post) => <div>
-          {filter ? posts.filter((post) => post.validated).map(post => 
-            <PostListItem 
-              key={index} 
-              username={post.userName} 
-              img={post.userProfileImgUrl}
-              comment={post.comment}
-              postedOn={post.postedOn}
-            />)
-            : 
             <PostListItem 
               key={index+1*Math.random()} 
               username={post.userName} 
               img={post.userProfileImgUrl}
               comment={post.comment}
               postedOn={post.postedOn}
-            />}
+            />
           </div>}
-      />  
+        />  
       <NumberPicker virtuoso={virtuoso}/>
     </div>
       )

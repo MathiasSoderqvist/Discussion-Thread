@@ -1,33 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Filter from './Components/Filter';
 import PostList from './Components/PostList';
 import NewPost from './Components/NewPost';
-import newPost from './ApiService';
+import API from './ApiService';
 import CommentBtn from './Components/CommentBtn';
 import { Post, Page } from './interfaces';
 import './App.css';
 
 const App: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([])
-  const [filter, setFilter] = useState<boolean>(false)
-  const [focusClicked, setFocusClicked] = useState<boolean>(false)
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
+  const [filter, setFilter] = useState<boolean>(false);
+  const [focusClicked, setFocusClicked] = useState<boolean>(false);
   const [page, setPage] = useState<Page[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [filterPosts, setFilterPosts] = useState<boolean>(false);
   const START_PAGE = 1;
 
   useEffect(() => {
-    getPage(START_PAGE);
+    API.getPage(START_PAGE)
+    .then((data: React.SetStateAction<Page[]>) => setPage(data))
+    .catch((error: any) => console.log('Error fetching page', error));
+    getPagePosts(START_PAGE);
+    setFilterPosts(true);
   }, []);
 
-  useEffect(() => {
-    getPagePosts(START_PAGE);
-  } , []);
+  // useEffect(() => {
+  //   const filterAllPosts = () => {
+  //     setFilteredPosts(posts.filter(post => post.validated));
+  //   }
+  //   filterAllPosts()
+  // }, [filter])
 
-  const getPage = (pageNumber: number) => {
-    fetch(`/api/posts?page${pageNumber}`)
-    .then((res) => res.json())
-    .then((data) => setPage(data))
-    .catch((error) => console.log('Error fetching page', error));
-}
+  // const filterAllPosts = useCallback(() => {
+  //   setFilteredPosts(posts.filter(post => post.validated));
+  // }, [])
+  // useEffect(() => {
+  //   filterAllPosts()
+  // }, [filterAllPosts])
+
+//   const getFilterPagePosts = () => {
+//     setFilteredPosts(posts.filter(post => post.validated));
+// }
+
+useEffect(() => {
+  setFilteredPosts(posts.filter(post => post.validated));
+}, [filter]);
 
   const getPagePosts = (currentPage: number) => {
     fetch(`/api/posts?page${currentPage}`)
@@ -38,6 +56,7 @@ const App: React.FC = () => {
 
 // Load posts for next page
   const getNextPage = (pageNumber: number) => { 
+    setCurrentPage(currentPage + 1);
       fetch(`/api/posts?page=${pageNumber}`)
       .then((res) => res.json())
       .then((data) => setPosts(prevPosts => [...prevPosts,  ...data.posts]))
@@ -45,6 +64,7 @@ const App: React.FC = () => {
   }
   // Load posts for previous page
   const getPrevPage = (pageNumber: number) => {
+    setCurrentPage(currentPage - 1);
     fetch(`/api/posts?page=${pageNumber}`)
     .then((res) => res.json())
     .then((data) => setPosts(prevPosts => [ ...data.posts, ...prevPosts]))
@@ -53,9 +73,10 @@ const App: React.FC = () => {
 
   console.log("POSTS: ", posts);
   console.log("PAGE: ", page);
+  console.log("FILTERED POSTS: ", filteredPosts);
 
   const createPost = (body: Object) => {
-    newPost(body)
+    API.newPost(body)
       .then(post => {
         setPosts(prevPosts => [...prevPosts,  post.posts])
       })
@@ -87,6 +108,7 @@ const App: React.FC = () => {
           focusClicked={focusClicked}
           getNextPage={getNextPage}
           getPrevPage={getPrevPage}
+          filteredPosts={filteredPosts}
         />
       : <div></div>}
       {(focusClicked) ?
