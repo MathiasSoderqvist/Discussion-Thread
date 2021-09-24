@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Filter from './Components/Filter';
 import PostList from './Components/PostList';
 import NewPost from './Components/NewPost';
@@ -95,14 +95,14 @@ const App: React.FC = () => {
       : <div></div>}
       {(focusClicked) ?
         <NewPost 
-        createPost={createPost} 
-        focusClicked={focusClicked}
-        handleFocus={handleFocus}
+          createPost={createPost} 
+          focusClicked={focusClicked}
+          handleFocus={handleFocus}
       />
       : <div></div>}
       <CommentBtn 
-      focusClicked={focusClicked}
-      handleFocus={handleFocus}/>
+        focusClicked={focusClicked}
+        handleFocus={handleFocus}/>
     </div>
   );
 }
