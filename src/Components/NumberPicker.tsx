@@ -23,9 +23,10 @@ const useStyles = makeStyles({
 
 interface Props {
   virtuoso: React.MutableRefObject<any>;
+  selectPage: (page: number) => void;
 }
 
-const SplitButton: React.FC<Props> = ({ virtuoso }) => {
+const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -33,8 +34,9 @@ const SplitButton: React.FC<Props> = ({ virtuoso }) => {
 
   const handleClick = () => {
     console.info(`You clicked ${options[selectedIndex]}`);
+    selectPage(selectedIndex);
     virtuoso.current.scrollToIndex({
-      index: selectedIndex*20,  //change page here, not index in posts[]
+      index: 4,  //change page here, not index in posts[]
       align: 'start',
       behavior: 'smooth',
     });

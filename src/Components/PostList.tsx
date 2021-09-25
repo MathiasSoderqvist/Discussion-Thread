@@ -11,9 +11,10 @@ interface Props {
   focusClicked: boolean;
   getNextPage: (pageNumber: number) => void;
   getPrevPage: (pageNumber: number) => void;
+  selectPage: (pageNumber: number) => void;
 }
 
-const PostList: React.FC<Props> = ({ posts, filteredPosts, filter, focusClicked, getPrevPage, getNextPage }) => {
+const PostList: React.FC<Props> = ({ posts, filteredPosts, filter, focusClicked, getPrevPage, getNextPage, selectPage }) => {
   const virtuoso = useRef<VirtuosoHandle>(null);
   const START_INDEX = 1;
   const INITIAL_ITEM_COUNT = 20;
@@ -63,7 +64,7 @@ const PostList: React.FC<Props> = ({ posts, filteredPosts, filter, focusClicked,
     <div >
       <Virtuoso
         firstItemIndex={currentPage+5} //make own variable for first item index
-        initialTopMostItemIndex={INITIAL_ITEM_COUNT - 10}
+        initialTopMostItemIndex={INITIAL_ITEM_COUNT - 14}
         style={{ height: focusClicked ? "350px": "600px", width: "80%" }}
         ref={virtuoso}
         data={filter ? filteredPosts : posts}
@@ -80,7 +81,10 @@ const PostList: React.FC<Props> = ({ posts, filteredPosts, filter, focusClicked,
             />
           </div>}
         />  
-      <NumberPicker virtuoso={virtuoso}/>
+      <NumberPicker 
+      virtuoso={virtuoso}
+      selectPage={selectPage}
+      />
     </div>
       )
 }

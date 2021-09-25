@@ -30,6 +30,15 @@ const App: React.FC = () => {
     .catch((error) => console.log('Error fetching page', error));
 }
 
+const selectPage = (page: number) => {
+  //update current page state for postListt so it can display correct prepend and appended pages
+  const pageIndex = page + 1;
+  fetch(`/api/posts?page${pageIndex}`)
+    .then((res) => res.json())
+    .then((data) => setPosts(data.posts))
+    .catch((error) => console.log('Error fetching clicked page', error));
+};
+
 // Load posts for next page
   const getNextPage = (pageNumber: number) => { 
     // setCurrentPage(currentPage + 1); //is this line necessary?
@@ -41,9 +50,7 @@ const App: React.FC = () => {
   }
   // Load posts for previous page
   const getPrevPage = (pageNumber: number) => {
-    console.log("PAGE NUMBER 11111: " , pageNumber);
     // setCurrentPage(currentPage - 1);
-    console.log("PAGE NUMBER: " , pageNumber);
     fetch(`/api/posts?page=${pageNumber}`)
     .then((res) => res.json())
     .then((data) => setPosts(prevPosts => [ ...data.posts, ...prevPosts]))
@@ -89,6 +96,7 @@ const App: React.FC = () => {
           getNextPage={getNextPage}
           getPrevPage={getPrevPage}
           filteredPosts={filteredPosts}
+          selectPage={selectPage}
         />
       : <div></div>}
       {(focusClicked) ?
