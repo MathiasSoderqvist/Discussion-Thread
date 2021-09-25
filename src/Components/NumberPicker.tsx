@@ -34,7 +34,7 @@ const SplitButton: React.FC<Props> = ({ virtuoso }) => {
   const handleClick = () => {
     console.info(`You clicked ${options[selectedIndex]}`);
     virtuoso.current.scrollToIndex({
-      index: selectedIndex*20,
+      index: selectedIndex*20,  //change page here, not index in posts[]
       align: 'start',
       behavior: 'smooth',
     });

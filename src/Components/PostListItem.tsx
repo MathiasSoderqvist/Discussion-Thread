@@ -64,9 +64,9 @@ const PostListItem: React.FC<Props> = ({ username, img, comment, postedOn }) => 
       </div>
       </div>
       <div className={classes.text}>
-      <ReadMore >
+      {/* <ReadMore > */}
         {comment}
-      </ReadMore>
+      {/* </ReadMore> */}
       </div>
       <div className={classes.icons}>
         <ThumbUpOffAltTwoToneIcon className={classes.thumbup} />

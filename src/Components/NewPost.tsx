@@ -37,6 +37,7 @@ const NewPost: React.FC<Props> = ({ createPost, focusClicked, handleFocus }) => 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     handleFocus();
+    //scroll to comment on submit here
     let input = { userName, userProfileImgUrl, comment, validated, postedOn };
       createPost(input);
       setComment('');

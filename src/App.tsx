@@ -13,8 +13,7 @@ const App: React.FC = () => {
   const [filter, setFilter] = useState<boolean>(false);
   const [focusClicked, setFocusClicked] = useState<boolean>(false);
   const [page, setPage] = useState<Page[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [filterPosts, setFilterPosts] = useState<boolean>(false);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
   const START_PAGE = 1;
 
   useEffect(() => {
@@ -22,12 +21,7 @@ const App: React.FC = () => {
     .then((data: React.SetStateAction<Page[]>) => setPage(data))
     .catch((error: any) => console.log('Error fetching page', error));
     getPagePosts(START_PAGE);
-    setFilterPosts(true);
   }, []);
-
-  useEffect(() => {
-    setFilteredPosts(posts.filter(post => post.validated));
-  }, [filter]);
 
   const getPagePosts = (currentPage: number) => {
     fetch(`/api/posts?page${currentPage}`)
@@ -38,7 +32,8 @@ const App: React.FC = () => {
 
 // Load posts for next page
   const getNextPage = (pageNumber: number) => { 
-    setCurrentPage(currentPage + 1);
+    // setCurrentPage(currentPage + 1); //is this line necessary?
+    console.log("This is the bug! getNextPage");
       fetch(`/api/posts?page=${pageNumber}`)
       .then((res) => res.json())
       .then((data) => setPosts(prevPosts => [...prevPosts,  ...data.posts]))
@@ -46,7 +41,9 @@ const App: React.FC = () => {
   }
   // Load posts for previous page
   const getPrevPage = (pageNumber: number) => {
-    setCurrentPage(currentPage - 1);
+    console.log("PAGE NUMBER 11111: " , pageNumber);
+    // setCurrentPage(currentPage - 1);
+    console.log("PAGE NUMBER: " , pageNumber);
     fetch(`/api/posts?page=${pageNumber}`)
     .then((res) => res.json())
     .then((data) => setPosts(prevPosts => [ ...data.posts, ...prevPosts]))
@@ -66,6 +63,7 @@ const App: React.FC = () => {
 
   const filterValidated = () => {
     if(!filter) {
+      setFilteredPosts(posts.filter(post => post.validated));
       setFilter(true);
     } else {
       setFilter(false);
