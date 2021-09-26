@@ -10,6 +10,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { makeStyles } from '@mui/styles';
+import { VirtuosoHandle } from 'react-virtuoso';
 
 const options = ['Page 1', 'Page 2', 'Page 3', 'Page 4', 'Page 5'];
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  virtuoso: React.MutableRefObject<any>;
+  virtuoso: React.MutableRefObject<VirtuosoHandle | null>;
   selectPage: (page: number) => void;
 }
 
@@ -34,10 +35,9 @@ const SplitButton = ({ virtuoso, selectPage }: Props) => {
   const classes = useStyles();
 
   const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
     selectPage(selectedIndex);
-    virtuoso.current.scrollToIndex({
-      index: 4, // change page here, not index in posts[]
+    virtuoso.current?.scrollToIndex({
+      index: 4,
       align: 'start',
       behavior: 'smooth',
     });

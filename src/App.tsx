@@ -31,7 +31,7 @@ const App: React.FC = () => {
   useEffect(() => {
     API.getPage(START_PAGE)
       .then((data: React.SetStateAction<Page[]>) => setPage(data))
-      .catch((error: any) => console.log('Error fetching page', error));
+      .catch((error) => console.log('Error fetching page', error));
     getPagePosts(START_PAGE);
   }, []);
 
@@ -48,9 +48,7 @@ const App: React.FC = () => {
 
   const getNextPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    setCurrentPagePrepend(pageNumber);
     setCurrentPageAppend(pageNumber);
-    console.log('This is the bug! getNextPage');
     fetch(`/api/posts?page=${pageNumber}`)
       .then((res) => res.json())
       .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
@@ -60,7 +58,6 @@ const App: React.FC = () => {
   const getPrevPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     setCurrentPagePrepend(pageNumber);
-    setCurrentPageAppend(pageNumber);
     fetch(`/api/posts?page=${pageNumber}`)
       .then((res) => res.json())
       .then((data) => setPosts((prevPosts) => [...data.posts, ...prevPosts]))
@@ -79,16 +76,14 @@ const App: React.FC = () => {
   };
 
   const checkFirstPage = () => {
-    console.log('11111 in prepend func with page:', currentPagePrepend);
-    if (currentPagePrepend <= 1) {
-      console.log('in prepend func with page:', currentPagePrepend);
-      setCurrentPagePrepend(LAST_PAGE - 1);
+    if (currentPagePrepend <= START_PAGE) {
+      setCurrentPagePrepend(LAST_PAGE + 1);
     }
   };
 
   const checkLastPage = () => {
     if (currentPageAppend >= LAST_PAGE) {
-      setCurrentPageAppend(START_INDEX);
+      setCurrentPageAppend(START_PAGE);
     }
   };
 

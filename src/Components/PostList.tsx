@@ -21,20 +21,19 @@ interface Props {
   currentPageAppend: number;
 }
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const PostList = ({
   // eslint-disable-next-line max-len
   posts, filteredPosts, filter, focusClicked, getPrevPage, getNextPage, selectPage, currentPage, currentPagePrepend, currentPageAppend, checkFirstPage, checkLastPage,
 }: Props) => {
   const virtuoso = useRef<VirtuosoHandle>(null);
   const INITIAL_ITEM_COUNT = 20;
+  const firstItem = currentPage + 5;
   console.log('Posts Length: ', posts.length);
 
   const prependItems = useCallback(() => {
     checkFirstPage();
     const previousPage = currentPagePrepend - 1;
 
-    console.log('PREVPAGE:', previousPage);
     setTimeout(() => {
       getPrevPage(previousPage);
     }, 500);
@@ -43,7 +42,6 @@ const PostList = ({
   }, [currentPagePrepend, getPrevPage]);
 
   const appendItems = useCallback(() => {
-    console.log('in append func 1');
     checkLastPage();
     const nextPage = currentPageAppend + 1;
 
@@ -57,7 +55,7 @@ const PostList = ({
   return (
     <div>
       <Virtuoso
-        firstItemIndex={currentPage + 5} // make own variable for first item index
+        firstItemIndex={firstItem}
         initialTopMostItemIndex={INITIAL_ITEM_COUNT - 14}
         style={{ height: focusClicked ? '350px' : '600px', width: '80%' }}
         ref={virtuoso}
