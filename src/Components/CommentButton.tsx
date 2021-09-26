@@ -1,5 +1,5 @@
-import React from 'react'
-import { makeStyles } from '@mui/styles'
+import React from 'react';
+import { makeStyles } from '@mui/styles';
 import ReplyTwoToneIcon from '@mui/icons-material/ReplyTwoTone';
 
 interface Props {
@@ -33,30 +33,31 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     padding: '0 30px',
     fontSize: '1em',
-    transition: "background 0.5s, color 0.5s, border 0.5s",
-    "&:hover": {
-    backgroundColor: "#F0F0F0",
-    color: "#0092DB"
+    transition: 'background 0.5s, color 0.5s, border 0.5s',
+    '&:hover': {
+      backgroundColor: '#F0F0F0',
+      color: '#0092DB',
     },
   },
 });
 
-const CommentBtn: React.FC<Props> = ({ handleFocus, focusClicked }) => {
-
+const CommentButton = ({ handleFocus, focusClicked }: Props) => {
   const classes = useStyles();
   return (
-    <div className={classes.root}> 
-      <button 
-        className={classes.button} 
-        style={{backgroundColor: focusClicked ? '#FF7F7F' : '#e6f2ff', color: focusClicked ? '#FFF' : '#0092DB'}}
-        onClick={()=>{
-        handleFocus()}
-      }>
-      <ReplyTwoToneIcon className={classes.icon}/>
-      {focusClicked ? 'Close' : 'Comment'}
+    <div className={classes.root}>
+      <button
+        type="button"
+        className={classes.button}
+        style={{ backgroundColor: focusClicked ? '#FF7F7F' : '#e6f2ff', color: focusClicked ? '#FFF' : '#0092DB' }}
+        onClick={() => {
+          handleFocus();
+        }}
+      >
+        <ReplyTwoToneIcon className={classes.icon} />
+        {focusClicked ? 'Close' : 'Comment'}
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default CommentBtn;
+export default CommentButton;

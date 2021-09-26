@@ -1,5 +1,5 @@
-import React from 'react'
-import { makeStyles } from '@mui/styles'
+import React from 'react';
+import { makeStyles } from '@mui/styles';
 import TuneIcon from '@mui/icons-material/Tune';
 
 interface Props {
@@ -24,10 +24,10 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     padding: '0 30px',
     fontSize: '1em',
-    transition: "background 0.5s, color 0.5s, border 0.5s",
-    "&:hover": {
-    backgroundColor: "#e6f2ff",
-    color: "#0092DB"
+    transition: 'background 0.5s, color 0.5s, border 0.5s',
+    '&:hover': {
+      backgroundColor: '#e6f2ff',
+      color: '#0092DB',
     },
   },
   text: {
@@ -50,26 +50,25 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     padding: '0 30px',
     fontSize: '1em',
-    transition: "background 0.5s, color 0.5s, border 0.5s",
-    "&:hover": {
-    backgroundColor: "#e6f2ff",
-    color: "#0092DB"
+    transition: 'background 0.5s, color 0.5s, border 0.5s',
+    '&:hover': {
+      backgroundColor: '#e6f2ff',
+      color: '#0092DB',
     },
-  }
+  },
 });
 
-const Filter: React.FC<Props> = ({ filterValidated, filter }) => {
-
+const Filter = ({ filterValidated, filter }: Props) => {
   const classes = useStyles();
   return (
-    <div> 
-      <div > 
-      <button onClick={() => filterValidated()} className={filter ? classes.filtered : classes.button} >
-      <TuneIcon />
-      <p className={classes.text}>Filter</p>
-      </button>
+    <div>
+      <div>
+        <button type="button" onClick={() => filterValidated()} className={filter ? classes.filtered : classes.button}>
+          <TuneIcon />
+          <p className={classes.text}>Filter</p>
+        </button>
       </div>
     </div>
-  )
-}
+  );
+};
 export default Filter;

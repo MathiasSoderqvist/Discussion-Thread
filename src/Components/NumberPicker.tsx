@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
@@ -26,7 +27,7 @@ interface Props {
   selectPage: (page: number) => void;
 }
 
-const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
+const SplitButton = ({ virtuoso, selectPage }: Props) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -36,7 +37,7 @@ const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
     console.info(`You clicked ${options[selectedIndex]}`);
     selectPage(selectedIndex);
     virtuoso.current.scrollToIndex({
-      index: 4,  //change page here, not index in posts[]
+      index: 4, // change page here, not index in posts[]
       align: 'start',
       behavior: 'smooth',
     });
@@ -57,8 +58,8 @@ const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
 
   const handleClose = (event: Event) => {
     if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
+      anchorRef.current
+      && anchorRef.current.contains(event.target as HTMLElement)
     ) {
       return;
     }
@@ -67,7 +68,7 @@ const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button" className={classes.container}>
         <Button onClick={() => handleClick()}>{options[selectedIndex]}</Button>
         <Button
@@ -90,6 +91,7 @@ const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
       >
         {({ TransitionProps, placement }) => (
           <Grow
+            // eslint-disable-next-line react/jsx-props-no-spreading
             {...TransitionProps}
             style={{
               transformOrigin:
@@ -114,8 +116,8 @@ const SplitButton: React.FC<Props> = ({ virtuoso, selectPage }) => {
           </Grow>
         )}
       </Popper>
-    </React.Fragment>
+    </>
   );
-}
+};
 
-export default SplitButton
+export default SplitButton;

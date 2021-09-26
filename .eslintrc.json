@@ -1,0 +1,64 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
+        "airbnb"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint"
+    ],
+    "overrides": [
+      {
+          "files": ["*.ts"],
+          "rules": {
+              "no-undef": "off"
+          }
+      }
+  ],
+    "rules": {
+        "react/jsx-filename-extension": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+         ],  
+         "no-use-before-define": "off",
+         "@typescript-eslint/no-use-before-define": ["error"],
+         "max-len": ["error", { "code": 120 }],
+         "eol-last": 0,
+         "react/prop-types": ["off"], 
+         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+         "import/no-extraneous-dependencies": ["error",  {"devDependencies": true}]
+    },
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      }
+}

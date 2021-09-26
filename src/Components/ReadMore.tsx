@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+/* eslint-disable max-len */
+import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -6,7 +7,6 @@ const useStyles = makeStyles({
     color: 'rgb(192,192,192)',
     cursor: 'pointer',
   },
-
 });
 
 const ReadMore: React.FC = ({ children }) => {
@@ -18,20 +18,23 @@ const ReadMore: React.FC = ({ children }) => {
     setIsReadMore(!isReadMore);
   };
 
-  const sliced = (text: any) => {
-    return text.slice(0, 400);
-  } 
+  const toggleReadMoreKey = (e: { keyCode: number; }) => {
+    if (e.keyCode === 13) {
+      setIsReadMore(!isReadMore);
+    }
+  };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sliced = (textToSlice: any) => textToSlice.slice(0, 400);
   return (
     <div>
       <p>
         {isReadMore ? sliced(text) : text}
-        <span onClick={toggleReadMore} className={classes.readOrHide}>
-        {isReadMore ? "...read more" : "hide"}
-      </span>
+        <span role="button" tabIndex={0} onClick={toggleReadMore} className={classes.readOrHide} onKeyDown={toggleReadMoreKey}>
+          {isReadMore ? '...read more' : 'hide'}
+        </span>
       </p>
     </div>
-    
   );
 };
 
