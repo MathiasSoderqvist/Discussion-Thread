@@ -50,6 +50,7 @@ const useStyles = makeStyles({
   },
 });
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const PostListItem = ({
   username, img, comment, postedOn,
 }: Props) => {

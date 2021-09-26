@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 // eslint-disable-next-line no-undef
 function fetchRequest(path: string, options?: RequestInit | undefined) {
   return fetch(path, options)
@@ -20,7 +22,14 @@ function newPost(body: Record<string, unknown>) {
 
 const getPage = (pageNumber: number) => fetchRequest(`/api/posts?page${pageNumber}`);
 
-const getPagePosts = (currentPage: number) => fetchRequest(`/api/posts?page${currentPage}`);
+const getPagePosts = (pageNumber: number) => fetchRequest(`/api/posts?page${pageNumber}`);
 
-const API = { newPost, getPage, getPagePosts };
+const selectedPageFetch = (selectedPage: number) => {
+  const pageIndex = selectedPage + 1;
+  return fetchRequest(`/api/posts?page${pageIndex}`);
+};
+
+const API = {
+  newPost, getPage, getPagePosts, selectedPageFetch,
+};
 export default API;

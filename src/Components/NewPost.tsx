@@ -53,8 +53,8 @@ const NewPost = ({ createPost, focusClicked, handleFocus }: Props) => {
     setComment(target.value);
   };
 
-  const focusOn = (ref: React.MutableRefObject<any>) => {
-    ref.current.focus();
+  const focusOn = (ref: React.MutableRefObject<HTMLInputElement | undefined>) => {
+    ref.current?.focus();
   };
 
   useEffect(() => {

@@ -21,9 +21,20 @@ interface Props {
   currentPageAppend: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const PostList = ({
-  // eslint-disable-next-line max-len
-  posts, filteredPosts, filter, focusClicked, getPrevPage, getNextPage, selectPage, currentPage, currentPagePrepend, currentPageAppend, checkFirstPage, checkLastPage,
+  posts,
+  filteredPosts,
+  filter,
+  focusClicked,
+  getPrevPage,
+  getNextPage,
+  selectPage,
+  currentPage,
+  currentPagePrepend,
+  currentPageAppend,
+  checkFirstPage,
+  checkLastPage,
 }: Props) => {
   const virtuoso = useRef<VirtuosoHandle>(null);
   const INITIAL_ITEM_COUNT = 20;

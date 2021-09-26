@@ -9,7 +9,6 @@ import { Post, Page } from './interfaces';
 import './App.css';
 
 const App: React.FC = () => {
-  const START_INDEX = 1;
   const START_PAGE = 1;
   const LAST_PAGE = 5;
   const [posts, setPosts] = useState<Post[]>([]);
@@ -19,38 +18,30 @@ const App: React.FC = () => {
   const [page, setPage] = useState<Page[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPagePrepend, setCurrentPagePrepend] = useState<number>(LAST_PAGE + 1);
-  const [currentPageAppend, setCurrentPageAppend] = useState<number>(START_INDEX);
-
-  const getPagePosts = (selectedPage: number) => {
-    fetch(`/api/posts?page${selectedPage}`)
-      .then((res) => res.json())
-      .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
-      .catch((error) => console.log('Error fetching page', error));
-  };
+  const [currentPageAppend, setCurrentPageAppend] = useState<number>(START_PAGE);
 
   useEffect(() => {
     API.getPage(START_PAGE)
       .then((data: React.SetStateAction<Page[]>) => setPage(data))
       .catch((error) => console.log('Error fetching page', error));
-    getPagePosts(START_PAGE);
+    API.getPagePosts(START_PAGE)
+      .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
+      .catch((error) => console.log('Error fetching page', error));
   }, []);
 
   const selectPage = (selectedPage: number) => {
     setCurrentPage(selectedPage);
     setCurrentPagePrepend(selectedPage);
     setCurrentPageAppend(selectedPage);
-    const pageIndex = selectedPage + 1;
-    fetch(`/api/posts?page${pageIndex}`)
-      .then((res) => res.json())
-      .then((data) => setPosts(data.posts))
-      .catch((error) => console.log('Error fetching clicked page', error));
+    API.selectedPageFetch(selectedPage)
+      .then((data: { posts: React.SetStateAction<Post[]>; }) => setPosts(data.posts))
+      .catch((error: unknown) => console.log('Error fetching clicked page', error));
   };
 
   const getNextPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     setCurrentPageAppend(pageNumber);
-    fetch(`/api/posts?page=${pageNumber}`)
-      .then((res) => res.json())
+    API.getPagePosts(pageNumber)
       .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
       .catch((error) => console.log('Error fetching posts', error));
   };
@@ -58,15 +49,10 @@ const App: React.FC = () => {
   const getPrevPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     setCurrentPagePrepend(pageNumber);
-    fetch(`/api/posts?page=${pageNumber}`)
-      .then((res) => res.json())
+    API.getPagePosts(pageNumber)
       .then((data) => setPosts((prevPosts) => [...data.posts, ...prevPosts]))
       .catch((error) => console.log('Error fetching posts', error));
   };
-
-  console.log('POSTS: ', posts);
-  console.log('PAGE: ', page);
-  console.log('FILTERED POSTS: ', filteredPosts);
 
   const createPost = (body: Record<string, unknown>) => {
     API.newPost(body)
