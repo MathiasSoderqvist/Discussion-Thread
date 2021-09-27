@@ -39,7 +39,6 @@ const PostList = ({
   const virtuoso = useRef<VirtuosoHandle>(null);
   const INITIAL_ITEM_COUNT = 20;
   const firstItem = currentPage + 5;
-  console.log('Posts Length: ', posts.length);
 
   const prependItems = useCallback(() => {
     checkFirstPage();

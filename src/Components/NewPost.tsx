@@ -6,7 +6,6 @@ import IconButton from '@mui/material/IconButton';
 import SendTwoToneIcon from '@mui/icons-material/SendTwoTone';
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   createPost: (body: Record<string, unknown>) => void;
   focusClicked: boolean;
   handleFocus: () => void;

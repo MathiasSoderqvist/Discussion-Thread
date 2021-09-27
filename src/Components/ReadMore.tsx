@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
@@ -24,7 +24,6 @@ const ReadMore: React.FC = ({ children }) => {
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sliced = (textToSlice: any) => textToSlice.slice(0, 400);
   return (
     <div>

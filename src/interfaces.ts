@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface Post {
   userName: string,
   userProfileImgUrl: string,

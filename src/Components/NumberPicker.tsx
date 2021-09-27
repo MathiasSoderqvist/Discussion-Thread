@@ -28,6 +28,7 @@ interface Props {
   selectPage: (page: number) => void;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const SplitButton = ({ virtuoso, selectPage }: Props) => {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLDivElement>(null);

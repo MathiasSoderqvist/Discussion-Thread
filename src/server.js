@@ -44,7 +44,7 @@ function postsResults(items, filter, current_page, per_page_items) {
   };
 }
 
-// eslint-disable-next-line import/no-anonymous-default-export
+// eslint-disable-next-line
 export default function (numberOfPosts, pagesize) {
   createServer({
     models: {

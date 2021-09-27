@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 import Filter from './Components/Filter';
@@ -22,7 +24,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     API.getPage(START_PAGE)
-      .then((data: React.SetStateAction<Page[]>) => setPage(data))
+      .then((data) => setPage(data))
       .catch((error) => console.log('Error fetching page', error));
     API.getPagePosts(START_PAGE)
       .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
@@ -31,8 +33,8 @@ const App: React.FC = () => {
 
   const selectPage = (selectedPage: number) => {
     setCurrentPage(selectedPage);
-    setCurrentPagePrepend(selectedPage);
-    setCurrentPageAppend(selectedPage);
+    setCurrentPagePrepend(selectedPage + 1);
+    setCurrentPageAppend(selectedPage + 1);
     API.selectedPageFetch(selectedPage)
       .then((data: { posts: React.SetStateAction<Post[]>; }) => setPosts(data.posts))
       .catch((error: unknown) => console.log('Error fetching clicked page', error));
