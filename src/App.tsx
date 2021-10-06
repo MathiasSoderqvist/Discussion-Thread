@@ -41,17 +41,25 @@ const App: React.FC = () => {
   };
 
   const getNextPage = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    setCurrentPageAppend(pageNumber);
-    API.getPagePosts(pageNumber)
+    let pageParam = pageNumber;
+    if (pageNumber === LAST_PAGE + 1) {
+      pageParam = START_PAGE;
+    }
+    setCurrentPage(pageParam);
+    setCurrentPageAppend(pageParam);
+    API.getPagePosts(pageParam)
       .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
       .catch((error) => console.log('Error fetching posts', error));
   };
 
   const getPrevPage = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    setCurrentPagePrepend(pageNumber);
-    API.getPagePosts(pageNumber)
+    let pageParam = pageNumber;
+    if (pageNumber === START_PAGE - 1) {
+      pageParam = LAST_PAGE;
+    }
+    setCurrentPage(pageParam);
+    setCurrentPagePrepend(pageParam);
+    API.getPagePosts(pageParam)
       .then((data) => setPosts((prevPosts) => [...data.posts, ...prevPosts]))
       .catch((error) => console.log('Error fetching posts', error));
   };
