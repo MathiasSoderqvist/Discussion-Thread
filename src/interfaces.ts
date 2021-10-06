@@ -9,11 +9,11 @@ export interface Post {
 }
 
 export interface Page {
-  next_page: number,
   page: number,
   per_page: number,
-  posts: Post[],
   prev_page?: number,
+  next_page: number,
+  posts: Post[],
   total: number,
   total_pages: number,
 }

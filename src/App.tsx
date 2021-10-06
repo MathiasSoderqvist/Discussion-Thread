@@ -17,7 +17,7 @@ const App: React.FC = () => {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [filter, setFilter] = useState<boolean>(false);
   const [focusClicked, setFocusClicked] = useState<boolean>(false);
-  const [page, setPage] = useState<Page[]>([]);
+  const [page, setPage] = useState<Page>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [currentPagePrepend, setCurrentPagePrepend] = useState<number>(LAST_PAGE + 1);
   const [currentPageAppend, setCurrentPageAppend] = useState<number>(START_PAGE);

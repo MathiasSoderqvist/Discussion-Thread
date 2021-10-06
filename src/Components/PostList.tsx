@@ -67,7 +67,7 @@ const PostList = ({
       <Virtuoso
         firstItemIndex={firstItem}
         initialTopMostItemIndex={INITIAL_ITEM_COUNT - 14}
-        style={{ height: focusClicked ? '350px' : '600px', width: '80%' }}
+        style={{ height: focusClicked ? '375px' : '700px', width: '80%' }}
         ref={virtuoso}
         data={filter ? filteredPosts : posts}
         startReached={prependItems}
