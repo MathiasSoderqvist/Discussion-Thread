@@ -20,16 +20,9 @@ function newPost(body: Record<string, unknown>) {
   });
 }
 
-const getPage = (pageNumber: number) => fetchRequest(`/api/posts?page${pageNumber}`);
-
-const getPagePosts = (pageNumber: number) => fetchRequest(`/api/posts?page${pageNumber}`);
-
-const selectedPageFetch = (selectedPage: number) => {
-  const pageIndex = selectedPage + 1;
-  return fetchRequest(`/api/posts?page${pageIndex}`);
-};
+const getPage = (pageNumber: number | undefined) => fetchRequest(`/api/posts?page${pageNumber}`);
 
 const API = {
-  newPost, getPage, getPagePosts, selectedPageFetch,
+  newPost, getPage,
 };
 export default API;

@@ -7,18 +7,13 @@ import PostListItem from './PostListItem';
 import NumberPicker from './NumberPicker';
 
 interface Props {
-  posts: Post[];
-  filteredPosts: Post[];
+  posts: Post[] | undefined;
+  filteredPosts: Post[] | undefined;
   filter: boolean;
   focusClicked: boolean;
-  getNextPage: (pageNumber: number) => void;
-  getPrevPage: (pageNumber: number) => void;
+  getNextPage: () => void;
+  getPrevPage: () => void;
   selectPage: (pageNumber: number) => void;
-  checkFirstPage: () => void;
-  checkLastPage: () => void;
-  currentPage: number;
-  currentPagePrepend: number;
-  currentPageAppend: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -30,37 +25,26 @@ const PostList = ({
   getPrevPage,
   getNextPage,
   selectPage,
-  currentPage,
-  currentPagePrepend,
-  currentPageAppend,
-  checkFirstPage,
-  checkLastPage,
 }: Props) => {
   const virtuoso = useRef<VirtuosoHandle>(null);
   const INITIAL_ITEM_COUNT = 20;
-  const firstItem = currentPage + 5;
+  const firstItem = 5;
 
   const prependItems = useCallback(() => {
-    checkFirstPage();
-    const previousPage = currentPagePrepend - 1;
-
     setTimeout(() => {
-      getPrevPage(previousPage);
+      getPrevPage();
     }, 500);
 
     return false;
-  }, [currentPagePrepend, getPrevPage]);
+  }, [getPrevPage]);
 
   const appendItems = useCallback(() => {
-    checkLastPage();
-    const nextPage = currentPageAppend + 1;
-
     setTimeout(() => {
-      getNextPage(nextPage);
+      getNextPage();
     }, 500);
 
     return false;
-  }, [currentPageAppend, getNextPage]);
+  }, [getNextPage]);
 
   return (
     <div>

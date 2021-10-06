@@ -13,79 +13,62 @@ import './App.css';
 const App: React.FC = () => {
   const START_PAGE = 1;
   const LAST_PAGE = 5;
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
+  const [page, setPage] = useState<Page>();
+  const [posts, setPosts] = useState<Post[] | undefined>([]);
+  const [filteredPosts, setFilteredPosts] = useState<Post[] | undefined>([]);
   const [filter, setFilter] = useState<boolean>(false);
   const [focusClicked, setFocusClicked] = useState<boolean>(false);
-  const [page, setPage] = useState<Page>();
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentPagePrepend, setCurrentPagePrepend] = useState<number>(LAST_PAGE + 1);
-  const [currentPageAppend, setCurrentPageAppend] = useState<number>(START_PAGE);
 
   useEffect(() => {
     API.getPage(START_PAGE)
-      .then((data) => setPage(data))
-      .catch((error) => console.log('Error fetching page', error));
-    API.getPagePosts(START_PAGE)
-      .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
+      .then((data) => {
+        setPage(data);
+        setPosts(() => (data.posts));
+      })
       .catch((error) => console.log('Error fetching page', error));
   }, []);
 
   const selectPage = (selectedPage: number) => {
-    setCurrentPage(selectedPage);
-    setCurrentPagePrepend(selectedPage + 1);
-    setCurrentPageAppend(selectedPage + 1);
-    API.selectedPageFetch(selectedPage)
-      .then((data: { posts: React.SetStateAction<Post[]>; }) => setPosts(data.posts))
+    API.getPage(selectedPage)
+      .then((data) => {
+        setPage(data);
+        setPosts(data.posts);
+      })
       .catch((error: unknown) => console.log('Error fetching clicked page', error));
   };
 
-  const getNextPage = (pageNumber: number) => {
-    let pageParam = pageNumber;
-    if (pageNumber === LAST_PAGE + 1) {
-      pageParam = START_PAGE;
-    }
-    setCurrentPage(pageParam);
-    setCurrentPageAppend(pageParam);
-    API.getPagePosts(pageParam)
-      .then((data) => setPosts((prevPosts) => [...prevPosts, ...data.posts]))
-      .catch((error) => console.log('Error fetching posts', error));
+  const getNextPage = () => {
+    let next = page?.next_page;
+    if (next === null) next = START_PAGE;
+    API.getPage(next)
+      .then((data) => {
+        setPage(data);
+        setPosts(posts && page ? [...posts, ...page.posts] : posts);
+      })
+      .catch((error) => console.log('Error fetching next page', error));
   };
 
-  const getPrevPage = (pageNumber: number) => {
-    let pageParam = pageNumber;
-    if (pageNumber === START_PAGE - 1) {
-      pageParam = LAST_PAGE;
-    }
-    setCurrentPage(pageParam);
-    setCurrentPagePrepend(pageParam);
-    API.getPagePosts(pageParam)
-      .then((data) => setPosts((prevPosts) => [...data.posts, ...prevPosts]))
-      .catch((error) => console.log('Error fetching posts', error));
+  const getPrevPage = () => {
+    let prev = page?.prev_page;
+    if (prev === null) prev = LAST_PAGE;
+    API.getPage(prev)
+      .then((data) => {
+        setPage(data);
+        setPosts(posts ? [...data.posts, ...posts] : posts);
+      })
+      .catch((error) => console.log('Error fetching previous page', error));
   };
 
   const createPost = (body: Record<string, unknown>) => {
     API.newPost(body)
       .then((post) => {
-        setPosts((prevPosts) => [...prevPosts, post.posts]);
+        setPosts((prevPosts: Post[] | undefined) => (prevPosts ? [...prevPosts, post.posts] : [post.posts]));
       });
-  };
-
-  const checkFirstPage = () => {
-    if (currentPagePrepend <= START_PAGE) {
-      setCurrentPagePrepend(LAST_PAGE + 1);
-    }
-  };
-
-  const checkLastPage = () => {
-    if (currentPageAppend >= LAST_PAGE) {
-      setCurrentPageAppend(START_PAGE);
-    }
   };
 
   const filterValidated = () => {
     if (!filter) {
-      setFilteredPosts(posts.filter((post) => post.validated));
+      setFilteredPosts(posts?.filter((post) => post.validated));
       setFilter(true);
     } else {
       setFilter(false);
@@ -103,7 +86,7 @@ const App: React.FC = () => {
         filterValidated={filterValidated}
         filter={filter}
       />
-      {(posts.length > 0)
+      {posts && (posts.length > 0)
         ? (
           <PostList
             posts={posts}
@@ -113,11 +96,6 @@ const App: React.FC = () => {
             getPrevPage={getPrevPage}
             filteredPosts={filteredPosts}
             selectPage={selectPage}
-            currentPage={currentPage}
-            currentPagePrepend={currentPagePrepend}
-            currentPageAppend={currentPageAppend}
-            checkFirstPage={checkFirstPage}
-            checkLastPage={checkLastPage}
           />
         )
         : <div />}
